@@ -1,4 +1,4 @@
-package com.example
+package com.murrraywilliams.mqtt
 
 import akka.actor.{Actor,Props}
 import com.sandinh.paho.akka.Subscribe
@@ -8,7 +8,7 @@ import com.sandinh.paho.akka.Message
 class SubscribeActor extends Actor {
   
   private[this] val logger = org.log4s.getLogger
-  val topic = "hello/#"
+  val topic = "hello/world"
   
   logger.info("Starting SubScribeActor")
   println("Starting SubScribeActor.")

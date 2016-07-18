@@ -1,4 +1,4 @@
-package com.example
+package com.murrraywilliams.mqtt
 
 import akka.actor.ActorSystem
 import akka.actor.Props
@@ -10,7 +10,6 @@ object ApplicationMain extends App {
   private[this] val logger = org.log4s.getLogger
   
   val system = ActorSystem("MQTTActorSystem")
-  val pingActor = system.actorOf(PingActor.props, "pingActor")
   
   val mqttPubSub = system.actorOf(Props(classOf[MqttPubSub], PSConfig(
       brokerUrl = "tcp://pi2b.local:1883",
@@ -25,8 +24,6 @@ object ApplicationMain extends App {
   val mqttSubActor = system.actorOf(SubscribeActor.props, "subActor")
   logger.info("Created mqttSubActor")
   
-  pingActor ! PingActor.Initialize
-  // This example app will ping pong 3 times and thereafter terminate the ActorSystem - 
-  // see counter logic in PingActor
+  // pingActor ! PingActor.Initialize
   system.awaitTermination()
 }
