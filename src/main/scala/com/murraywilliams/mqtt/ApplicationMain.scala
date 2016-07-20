@@ -2,18 +2,21 @@ package com.murrraywilliams.mqtt
 
 import akka.actor.ActorSystem
 import akka.actor.Props
-import slick.driver.PostgresDriver.api._
 import scala.concurrent.{Future, Await}
 import com.murraywilliams.mqtt.MeasurementTable
 import slick.jdbc.meta.MTable
 import slick.dbio.SuccessAction
+import slick.backend.DatabaseConfig
+import slick.driver.JdbcProfile
 
 object ApplicationMain extends App {
   import com.sandinh.paho.akka._
   import scala.concurrent.duration._
   import scala.concurrent.ExecutionContext.Implicits.global
   
-  val db = Database.forConfig("mqttdb")
+  val dbConfig = DatabaseConfig.forConfig[JdbcProfile]("mqttPSQLds")
+  val db = dbConfig.db
+  import dbConfig.driver.api._
   
   private[this] val logger = org.log4s.getLogger
   
