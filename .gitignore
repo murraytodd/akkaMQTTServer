@@ -19,6 +19,9 @@ src_managed/
 project/boot/
 project/plugins/project/
 project/target
+project/.sbtserver
+project/.sbtserver.lock
+project/sbt-ui.sbt
 
 # activator
 libexec

@@ -11,7 +11,6 @@ class SubscribeActor extends Actor {
   val topic = "hello/world"
   
   logger.info("Starting SubScribeActor")
-  println("Starting SubScribeActor.")
   ApplicationMain.mqttPubSub ! Subscribe(topic,self)
 
   def receive  = {
