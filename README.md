@@ -22,7 +22,7 @@ As a special bit of functionality, the timestamps for these measurements can be 
 2. The server can use the timestamp that the message was received. (I.e. "Now")
 3. If a series of sequential measurements is sent, the server will assume the measurements are being taken at regular intervals and sent "in batch". It will look at the time that the last batch had been sent and approximate the timestamp of each element in the sequence accordingly.
 
-### What's up with this funny sequence of measurements?
+### Q: What's up with this funny sequence of measurements?
 
 Imagine you have wired-up an Arduino to a sensor, and it's depending on using an XBee radio to transmit the measurements to your server. Furthermore, your Arduino is out in the field somewhere without a power source, so you're using a small solar panel and a rechargeable battery.
 
@@ -31,3 +31,7 @@ This contraption has to record and send data overnight, when the solar panel isn
 I had a blast figuring out how to do this, and it involved putting the Arduino to sleep, waking up every couple minutes for a sensor reading, saving 10-20 readings at a time and then finally powering the XBee radio (a _serious_ energy drain) just long enough to send out those 10-20 readings before shutting it down again.
 
 The Arduino doesn't have any reliable clock, especially when it's in deep sleep mode, so my server has to extrapolate and figure out what 20 evenly spaced timestamps would be between the current data bundle and the last one.
+
+### Q: Isn't this problem a little too simple for Akka?
+
+I'm not sure yet. It's actually a funny question because Akka is considered to be one of the simplest service frameworks. (Play, which I considered using, is built on top of it.) I actually think that this server might evolve over time to be able to respond to MQTT and/or REST requests for the most recent measurements, the measurements over the past day, etc. I may also want to try to program a weather forecasting module that uses the ongoing trends in temperature/pressure/humidity changes to predict the weather, and that may actually be a good event-based exercise, so we'll see.
