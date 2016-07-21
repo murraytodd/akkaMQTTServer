@@ -14,7 +14,7 @@ object ApplicationMain extends App {
   import scala.concurrent.duration._
   import scala.concurrent.ExecutionContext.Implicits.global
   
-  val dbConfig = DatabaseConfig.forConfig[JdbcProfile]("mqttPSQLds")
+  val dbConfig = DatabaseConfig.forConfig[JdbcProfile]("mqttPSQLds") // mqttSQLiteds // mqttH2ds
   val db = dbConfig.db
   import dbConfig.driver.api._
   
@@ -50,9 +50,9 @@ object ApplicationMain extends App {
       measurements += ("arduino","tempK",(new java.util.Date()).getTime, 23.4)
   )
   
-  val createIfNotExist: DBIO[Unit] = tablesExist.flatMap(exist => if (!exist) create else SuccessAction{}).flatMap(_ => addRecord)
+  val createIfNotExist: DBIO[Unit] = tablesExist.flatMap(exist => if (!exist) create else SuccessAction{})
   
-  Await.result(db.run(createIfNotExist), Duration.Inf)
+  Await.result(db.run(createIfNotExist >> addRecord), Duration.Inf)
   
   
   db.close

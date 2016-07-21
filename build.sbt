@@ -10,6 +10,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick" % "3.1.1",
   "org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
   "com.h2database" % "h2" % "1.4.187" % "test",
+//  "org.xerial" % "sqlite-jdbc" % "3.8.11.2" % "test", // if you wanted to use SQLite3 instead
   "org.log4s" %% "log4s" % "1.3.0",
   "org.slf4j" % "slf4j-simple" % "1.7.21",
   "com.typesafe.akka" %% "akka-testkit" % "2.4.7" % "test",
@@ -17,3 +18,4 @@ libraryDependencies ++= Seq(
 
 
 fork in run := true
+cancelable in Global := true
