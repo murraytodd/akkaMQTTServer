@@ -35,3 +35,13 @@ The Arduino doesn't have any reliable clock, especially when it's in deep sleep 
 ### Q: Isn't this problem a little too simple for Akka?
 
 I'm not sure yet. It's actually a funny question because Akka is considered to be one of the simplest service frameworks. (Play, which I considered using, is built on top of it.) I actually think that this server might evolve over time to be able to respond to MQTT and/or REST requests for the most recent measurements, the measurements over the past day, etc. I may also want to try to program a weather forecasting module that uses the ongoing trends in temperature/pressure/humidity changes to predict the weather, and that may actually be a good event-based exercise, so we'll see.
+
+## Arduino sensor code
+
+The `/arduino` directory has a single sketch that I created to take temperature
+measurements with the MCP9808 temperature sensor and sending the results via an
+XBee Series 2 device (leveraging the [Adafruit library](https://github.com/adafruit/Adafruit_MCP9808_Library) for the sensor and [Andrew Rapp's library](https://github.com/andrewrapp/xbee-arduino) for the XBee).
+
+At the moment, we don't have enough pieces to put everything together yet. We still
+need to write the code that will run on the Raspberry Pi to receive the Arduino
+sensor readings and send them to the MQTT server.
