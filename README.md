@@ -44,4 +44,5 @@ XBee Series 2 device (leveraging the [Adafruit library](https://github.com/adafr
 
 At the moment, we don't have enough pieces to put everything together yet. We still
 need to write the code that will run on the Raspberry Pi to receive the Arduino
-sensor readings and send them to the MQTT server.
+sensor readings and send them to the MQTT server. More information can be found on
+the [README.md](arduino/README.md) file in the Arduino directory.
